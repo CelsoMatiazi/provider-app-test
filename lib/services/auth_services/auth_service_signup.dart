@@ -6,7 +6,7 @@ import '/data/repositories/auth_repository.dart';
 
 abstract class IAuthServiceSignup{
   Future postRegisterCpf(String cpf);
-  Future postRegisterPassword(SignupModel data);
+  Future postRegisterPassword(UserCredentialsModel data);
 }
 
 class AuthServiceSignup implements IAuthServiceSignup{
@@ -26,7 +26,7 @@ class AuthServiceSignup implements IAuthServiceSignup{
   }
 
   @override
-  Future<void> postRegisterPassword(SignupModel data) async {
+  Future<void> postRegisterPassword(UserCredentialsModel data) async {
     try{
       log("post Password from AuthService");
       log(data.cpf);

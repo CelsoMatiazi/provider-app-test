@@ -8,6 +8,7 @@ class HttpConstants {
   ///Endpoints
   static String login = "";
   static String signup = "";
+  static String forgot = "";
 
   ///unknown error
   static String unknownError = "Não foi possivel completar a operação, por favor tente novamente mais tarde e se o problema persistir entre em contato com nossa equipe de suporte.";

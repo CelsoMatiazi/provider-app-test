@@ -1,10 +1,10 @@
 
-class SignupModel{
+class UserCredentialsModel{
 
   String cpf;
   String password;
 
-  SignupModel({
+  UserCredentialsModel({
     required this.cpf,
     required this.password,
   });
@@ -12,7 +12,7 @@ class SignupModel{
   Map<String, dynamic> toMap() {
     return {
       'cpf': cpf,
-      'senha': password,
+      'password': password,
     };
   }
 

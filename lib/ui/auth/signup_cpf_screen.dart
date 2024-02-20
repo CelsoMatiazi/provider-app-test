@@ -8,11 +8,11 @@ import '/ui/components/custom_app_bar.dart';
 import '/ui/constants/colors.dart';
 import '/ui/utils/loader.dart';
 import '/ui/utils/app_messages.dart';
-import '../../constants/app_state.dart';
-import '../../components/custom_text_form_field.dart';
-import '../../components/custom_button.dart';
-import '../../constants/styles.dart';
-import '../../utils/regex_validate.dart';
+import '../constants/app_state.dart';
+import '../components/custom_text_form_field.dart';
+import '../components/custom_button.dart';
+import '../constants/styles.dart';
+import '../utils/regex_validate.dart';
 
 
 

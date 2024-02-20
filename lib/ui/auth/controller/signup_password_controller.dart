@@ -13,7 +13,7 @@ class SignupPasswordController extends ChangeNotifier{
 
   AppState signupState = AppState.initial;
 
-  Future<void> postSignup(SignupModel data) async {
+  Future<void> postSignup(UserCredentialsModel data) async {
     signupState = AppState.initial;
     try{
       await serviceSignup.postRegisterPassword(data);

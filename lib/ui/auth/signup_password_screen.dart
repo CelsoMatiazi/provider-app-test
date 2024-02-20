@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/ui/auth/controller/signup_password_controller.dart';
-import '../../../data/models/signup_model.dart';
-import '../../components/success_screen.dart';
-import '../../constants/app_state.dart';
+import '../../data/models/signup_model.dart';
+import '../components/success_screen.dart';
+import '../constants/app_state.dart';
 import '/ui/components/custom_app_bar.dart';
 import '/ui/constants/colors.dart';
 import '/ui/auth/components/new_password_page.dart';
@@ -30,7 +30,7 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> with Loader
     var controller = context.read<SignupPasswordController>();
     showLoader();
     await controller.postSignup(
-      SignupModel(cpf: cpf, password: password)
+      UserCredentialsModel(cpf: cpf, password: password)
     )
     .whenComplete(() async {
         hideLoader();

@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart';
-import '/services/http/http_client.dart';
 import '../models/signup_model.dart';
 import '../constants/http_constants.dart';
+import '../../services/rest_client/http_client.dart';
 
 
 abstract class IAuthRepository{
   Future postRegisterCPF({required String cpf});
-  Future postSignup({required SignupModel signupData});
-  Future postLogin({required String email, required String password});
+  Future postSignup({required UserCredentialsModel signupData});
+  Future postLogin({required UserCredentialsModel signupData});
   Future postForgotPassword({required String email});
 }
 
@@ -31,7 +31,7 @@ class AuthRepository implements IAuthRepository{
   }
 
   @override
-  Future postSignup({required SignupModel signupData}) async {
+  Future postSignup({required UserCredentialsModel signupData}) async {
     final Response response =  await client.post(
         url: HttpConstants.signup,
         body: json.encode(signupData.toMap())
@@ -44,16 +44,16 @@ class AuthRepository implements IAuthRepository{
   }
 
   @override
-  Future postLogin({required String email, required String password}) async {
+  Future postLogin({required UserCredentialsModel signupData}) async {
     final Response response =  await client.post(
         url: HttpConstants.login,
-        body: json.encode({ "email" : email, "password" : password })
+        body: json.encode(signupData.toMap())
     );
     // log(response.statusCode.toString());
     // log(response.body);
     final body = jsonDecode(response.body);
     if(response.statusCode == 200) return body['access'];
-    throw body['detail'] ?? HttpConstants.unknownError;
+    throw body['message'] ?? HttpConstants.unknownError;
 
   }
 
@@ -66,8 +66,8 @@ class AuthRepository implements IAuthRepository{
     log(response.statusCode.toString());
     log(response.body);
     final body = jsonDecode(response.body);
-    if(response.statusCode == 200) return body['detail'];
-    throw body['detail'] ?? HttpConstants.unknownError;
+    if(response.statusCode == 200) return body['message'];
+    throw body['message'] ?? HttpConstants.unknownError;
   }
 
 

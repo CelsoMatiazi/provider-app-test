@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/ui/home/controller/home_controller.dart';
-import '/services/http/http_client.dart';
+import '../services/rest_client/http_client.dart';
+
 
 
 class DependenceInjection extends StatelessWidget {
