@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:untitled/ui/constants/colors.dart';
 
 
 mixin Loader<T extends StatefulWidget> on State<T>{
@@ -13,11 +14,14 @@ mixin Loader<T extends StatefulWidget> on State<T>{
           barrierDismissible: false,
           context: context,
           builder: (context){
-            return const Center(
+            return Center(
               child: SizedBox(
-                height: 80,
-                  width: 80,
-                  child: CircularProgressIndicator()
+                height: 50,
+                  width: 50,
+                  child: CircularProgressIndicator(
+                    color: AppColors.orange,
+                    strokeWidth: 6,
+                  )
               ),
             );
           }

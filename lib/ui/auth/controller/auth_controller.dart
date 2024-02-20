@@ -20,7 +20,7 @@ class AuthController extends ChangeNotifier{
     signupState = AppState.initial;
     try{
       ///API Request
-      Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       signupState = AppState.success;
     }catch (e){
       rethrow;
@@ -31,7 +31,7 @@ class AuthController extends ChangeNotifier{
     signupState = AppState.initial;
     try{
       ///API Request
-      Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       signupState = AppState.success;
     }catch (e){
       rethrow;

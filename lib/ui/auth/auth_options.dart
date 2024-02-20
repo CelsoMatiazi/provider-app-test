@@ -4,8 +4,8 @@ import 'package:untitled/ui/constants/colors.dart';
 import 'package:untitled/ui/constants/styles.dart';
 import 'package:untitled/ui/utils/size_extensions.dart';
 
-class OptionsScreen extends StatelessWidget {
-  const OptionsScreen({super.key});
+class AuthOptionsScreen extends StatelessWidget {
+  const AuthOptionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

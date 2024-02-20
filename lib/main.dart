@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:untitled/ui/auth/login_screen.dart';
-import 'package:untitled/ui/auth/options.dart';
+import 'package:untitled/ui/auth/auth_options.dart';
 import '/dependence_injection/dependence_injection.dart';
 import '/ui/auth/controller/signup_di.dart';
 import '/ui/constants/app_themes.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'My App',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      home: const OptionsScreen(),
+      home: const AuthOptionsScreen(),
       //home: const UiTest(),
 
       routes: {

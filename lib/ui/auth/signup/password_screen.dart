@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '/data/models/signup_model.dart';
 import '/ui/components/custom_app_bar.dart';
@@ -28,7 +30,7 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> with Loader
 
   _saveUser() async {
     var controller = widget.controller;
-    //print(controller.cpf);
+    log(controller.cpf);
     showLoader();
     await controller.postSignup(
       SignupModel(cpf: controller.cpf, password: password)
