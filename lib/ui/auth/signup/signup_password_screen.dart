@@ -1,23 +1,21 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import '/data/models/signup_model.dart';
+import 'package:provider/provider.dart';
+import 'package:untitled/ui/auth/controller/signup_password_controller.dart';
+import '../../../data/models/signup_model.dart';
+import '../../components/success_screen.dart';
+import '../../constants/app_state.dart';
 import '/ui/components/custom_app_bar.dart';
 import '/ui/constants/colors.dart';
 import '/ui/auth/components/new_password_page.dart';
 import '/ui/utils/app_messages.dart';
 import '/ui/utils/loader.dart';
-import '../controller/auth_controller.dart';
-import '../../constants/app_state.dart';
-import '../../components/success_screen.dart';
 
 class SignupPasswordScreen extends StatefulWidget {
 
-  final AuthController controller;
 
   const SignupPasswordScreen({
     super.key,
-    required this.controller
   });
 
   @override
@@ -28,12 +26,11 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> with Loader
 
   String password = "";
 
-  _saveUser() async {
-    var controller = widget.controller;
-    log(controller.cpf);
+  _savePassword(String cpf) async {
+    var controller = context.read<SignupPasswordController>();
     showLoader();
     await controller.postSignup(
-      SignupModel(cpf: controller.cpf, password: password)
+      SignupModel(cpf: cpf, password: password)
     )
     .whenComplete(() async {
         hideLoader();
@@ -50,11 +47,13 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> with Loader
         message: error.toString(),
       );
     });
-
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+
+    final cpf = ModalRoute.of(context)!.settings.arguments as String;
+
     return  Scaffold(
       appBar: CustomAppBar(
         title: 'Senha',
@@ -65,7 +64,7 @@ class _SignupPasswordScreenState extends State<SignupPasswordScreen> with Loader
 
       body: SafeArea(
         child: NewPasswordPage(
-            onClick: _saveUser,
+            onClick: () =>  _savePassword(cpf),
             isSignup: true,
             getPassword: (pass){
               password = pass;

@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
-import '/ui/auth/controller/auth_controller.dart';
-import '/ui/auth/signup/password_screen.dart';
+import '/ui/auth/controller/signup_cpf_controller.dart';
 import '/ui/components/custom_app_bar.dart';
 import '/ui/constants/colors.dart';
 import '/ui/utils/loader.dart';
 import '/ui/utils/app_messages.dart';
+import '../../constants/app_state.dart';
 import '../../components/custom_text_form_field.dart';
 import '../../components/custom_button.dart';
 import '../../constants/styles.dart';
@@ -16,14 +16,14 @@ import '../../utils/regex_validate.dart';
 
 
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class SignupCpfScreen extends StatefulWidget {
+  const SignupCpfScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<SignupCpfScreen> createState() => _SignupCpfScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> with AppMessages, Loader {
+class _SignupCpfScreenState extends State<SignupCpfScreen> with AppMessages, Loader {
 
 
   final _formKey = GlobalKey<FormState>();
@@ -36,15 +36,27 @@ class _SignupScreenState extends State<SignupScreen> with AppMessages, Loader {
     return null;
   }
 
-  _validate(BuildContext contextB){
-    var controller = context.read<AuthController>();
-    controller.cpf = cpfMask.getUnmaskedText();
-    if(_formKey.currentState!.validate()){
-      Navigator.push(context, MaterialPageRoute(builder: (_) =>
-        SignupPasswordScreen(controller: context.read<AuthController>(),)
-      ));
-    }
+  _validate(){
+    if(_formKey.currentState!.validate()) _saveCpf();
+  }
 
+  _saveCpf() async {
+    showLoader();
+    var controller = context.read<SignupCpfController>();
+    await controller.postRegisterCpf(cpfMask.getUnmaskedText())
+        .whenComplete((){
+            hideLoader();
+            if(controller.signupState == AppState.success){
+                Navigator.pushNamed(context, "/signupPassword", arguments: cpfMask.getUnmaskedText() );
+            }
+        })
+        .onError((error, stackTrace){
+            showCustomDialog(
+              btnLabel: "Entendi",
+              title: "Erro",
+              message: error.toString(),
+            );
+        });
   }
 
 
@@ -85,7 +97,7 @@ class _SignupScreenState extends State<SignupScreen> with AppMessages, Loader {
             CustomButton(
                 backgroundColor: AppColors.orange,
                 label: "Avançar",
-                onClick: () => _validate(context)
+                onClick: () => _validate()
             ),
 
             const SizedBox(height: 20,),
