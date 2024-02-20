@@ -30,7 +30,7 @@ class AuthOptionsScreen extends StatelessWidget {
 
               Expanded(child: CustomButton(
                 onClick: (){
-                  Navigator.pushNamed(context, "/signup");
+                  Navigator.pushNamed(context, "/signupCpf");
                 },
                 label: 'Cadastrar',)
               )

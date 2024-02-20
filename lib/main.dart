@@ -1,9 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:untitled/ui/auth/di/signup_password_di.dart';
 import 'package:untitled/ui/auth/login_screen.dart';
 import 'package:untitled/ui/auth/auth_options.dart';
 import '/dependence_injection/dependence_injection.dart';
-import '/ui/auth/controller/signup_di.dart';
+import 'ui/auth/di/signup_cpf_di.dart';
 import '/ui/constants/app_themes.dart';
 
 
@@ -25,10 +26,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
       home: const AuthOptionsScreen(),
-      //home: const UiTest(),
 
       routes: {
-        "/signup" : (context) => SignupDI.page,
+        "/signupCpf" : (context) => SignupCpfDI.page,
+        "/signupPassword" : (context) => SignupPasswordDI.page,
         "/login" : (context) => const LoginScreen(),
       },
     );
